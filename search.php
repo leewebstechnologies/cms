@@ -10,8 +10,14 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                $query = "SELECT * FROM posts";
+                $search = $_POST['search'];
+                $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
                 $result = mysqli_query($connection, $query);
+                $count = mysqli_num_rows($result);
+                if ($count == 0)
+                    echo "<h1>No Results!</h1>";
+                else  {
+
                 while ($row = mysqli_fetch_assoc($result)) {
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
@@ -41,7 +47,10 @@
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } ?>
+                <?php  }
+             } 
+             
+             ?>
 
 
                 <!-- Pager -->
