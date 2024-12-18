@@ -24,7 +24,9 @@
                                 case 'add_post':
                                 include "includes/add_posts.php";
                                 break;
-                                case '200': echo "200"; break;
+                                case 'edit_post':
+                                include "includes/edit_posts.php";
+                                break;
                                 case '300': echo "300"; break;            
                                 default:                               
                                 include "../includes/view_all_posts.php";

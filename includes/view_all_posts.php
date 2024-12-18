@@ -9,7 +9,9 @@
             <th>Image</th>
             <th>Tags</th>
             <th>Comments</th>
-            <th>Date</th>                            
+            <th>Date</th>                           
+            <th>Action</th>                           
+            <th>Action</th>                           
         </tr>
     </thead>
     <tbody>
@@ -36,8 +38,22 @@
             echo "<td>$post_tags</td>";
             echo "<td>$post_comment_count</td>";
             echo "<td>$post_date</td>";
+            echo "<td><a href='posts.php?source=edit_post&post_id=$post_id'>EDIT</a></td>";
+            echo "<td><a href='posts.php?delete=$post_id'>DELETE</a></td>";
             echo "</tr>";                            
          }                                    
         ?>                               
     </tbody>
 </table>
+<?php
+    if (isset($_GET['delete'])) {
+        $delete_post_id = $_GET['delete'];
+        $query = "DELETE FROM posts WHERE post_id = $delete_post_id";
+        $result = mysqli_query($connection, $query);
+        if (!$result) {
+            die("Query Failed!".mysqli_error($connection));
+            header('Location: posts.php');
+       }
+    }
+
+?>
